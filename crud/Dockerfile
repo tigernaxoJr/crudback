@@ -5,16 +5,11 @@ EXPOSE 80
 EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
-RUN dotnet tool install --global dotnet-ef 
-ENV PATH="${PATH}:/root/.dotnet/tools"
-ENV ASPNETCORE_ENVIRONMENT=Production
 WORKDIR /src
 COPY ["crud/crud.csproj", "crud/"]
 RUN dotnet restore "crud/crud.csproj"
 COPY . .
 WORKDIR "/src/crud"
-RUN dotnet ef migrations add InitialCreate
-RUN dotnet ef database update
 RUN dotnet build "crud.csproj" -c Release -o /app/build
 
 FROM build AS publish

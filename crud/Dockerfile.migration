@@ -1,0 +1,10 @@
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS migrate
+RUN dotnet tool install --global dotnet-ef 
+ENV PATH="${PATH}:/root/.dotnet/tools"
+WORKDIR /src
+COPY ["crud/crud.csproj", "crud/"]
+RUN dotnet restore "crud/crud.csproj"
+COPY . .
+WORKDIR "/src/crud"
+RUN dotnet ef migrations add InitialCreate
+RUN dotnet ef database update
