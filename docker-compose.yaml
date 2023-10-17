@@ -15,7 +15,6 @@ services:
         #- ./pgdata:/var/lib/postgresql/data/pgdata
 
   ap:
-    image: adminer
     build:
       context: .
       dockerfile: crud/Dockerfile
