@@ -43,9 +43,17 @@ namespace crud.Controllers
         [HttpPost]
         public async Task<IActionResult> Post(Patient pt)
         {
-            var result = await hisContext.Patients.AddAsync(pt);
-            await hisContext.SaveChangesAsync();
-            return Ok(result);
+            try
+            {
+                await hisContext.Patients.AddAsync(pt);
+                await hisContext.SaveChangesAsync();
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                var a = ex.Message;
+                return StatusCode(500, a);
+            }
         }
 
         // PUT api/<PatientController>/5

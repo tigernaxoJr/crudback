@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Xml;
 
 namespace crud.PostgreSQL
@@ -9,6 +11,7 @@ namespace crud.PostgreSQL
         public HISContext(DbContextOptions<HISContext> opt) : base(opt) { }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Patient>().Property(p => p.PatientId).ValueGeneratedOnAdd();
             modelBuilder.Entity<Patient>().HasData(
                 new Patient { PatientId = 1, Name = "John Doe", gender = 1, idno = "1234567890" },
                 new Patient { PatientId = 2, Name = "Jane Doe", gender = 0, idno = "0987654321" },
@@ -65,6 +68,8 @@ namespace crud.PostgreSQL
     }
     public class Patient
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int PatientId { get; set; }
         public string Name { get; set; } = string.Empty;
         public int gender { get; set; }
