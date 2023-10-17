@@ -11,18 +11,13 @@ services:
       POSTGRES_PASSWORD: postgres
     ports:
       - 5432:5432
-        #volumes:
-        #- ./pgdata:/var/lib/postgresql/data/pgdata
 
   ap:
-    build:
-      context: .
-      dockerfile: crud/Dockerfile
+    image: crud
+    restart: always
     ports:
       - 80:80
       - 443:443
-    depends_on:
-      - db
 
   adminer:
     image: adminer
