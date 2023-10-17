@@ -17,8 +17,8 @@ namespace crud.Controllers
         [HttpGet]
         public IEnumerable<string> Get()
         {
-            hisContext.Add(new Blog());
-            hisContext.SaveChanges();
+            //hisContext.Add(new Blog());
+            //hisContext.SaveChanges();
             //hisContext.Patients.Add(new Patient());
             //hisContext.SaveChanges();
             //var a = hisContext.Patients;

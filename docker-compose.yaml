@@ -14,6 +14,17 @@ services:
         #volumes:
         #- ./pgdata:/var/lib/postgresql/data/pgdata
 
+  ap:
+    image: adminer
+    build:
+      context: .
+      dockerfile: crud/Dockerfile
+    ports:
+      - 80:80
+      - 443:443
+    depends_on:
+      - db
+
   adminer:
     image: adminer
     restart: always
