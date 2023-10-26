@@ -8,7 +8,10 @@ namespace crud.PostgreSQL
     public class HISContext: DbContext
     {
         public DbSet<Patient> Patients { get; set; }
-        public HISContext(DbContextOptions<HISContext> opt) : base(opt) { }
+        public HISContext(DbContextOptions<HISContext> opt) : base(opt)
+        {
+            Database.Migrate();
+        }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Patient>().Property(p => p.PatientId).ValueGeneratedOnAdd();
